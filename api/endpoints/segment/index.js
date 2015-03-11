@@ -45,3 +45,4 @@ Segment.create = function(request, options) {
 };
 
 module.exports = Segment;
+
