@@ -26,7 +26,8 @@ SuiteSignedUrlAuthenticator.prototype = {
     try {
       this.escher.authenticate(this._getAuthParams(url, host), this._getKeyDb());
     } catch (ex) {
-      throw new Error('Escher authentication');
+      ex.message = 'Escher authentication: ' + ex.message;
+      throw ex;
     }
   },
 
