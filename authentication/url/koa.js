@@ -4,10 +4,10 @@ var Authenticator = require('./');
 
 
 module.exports.getMiddleware = function(options) {
-  var authenticator = Authenticator.create(options);
 
   return function* (next) {
     var request = this.request;
+    var authenticator = Authenticator.create(options);
 
     try {
       authenticator.authenticate(request.url, request.header.host);
