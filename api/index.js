@@ -5,6 +5,7 @@ var ApiRequest = require('./../lib/api-request');
 var AdministratorAPI = require('./endpoints/administrator');
 var ContactAPI = require('./endpoints/contact');
 var ContactListAPI = require('./endpoints/contactlist');
+var ProgramResourceAPI = require('./endpoints/programresource');
 var LanguageAPI = require('./endpoints/language');
 var ExternalEventAPI = require('./endpoints/externalevent');
 var SettingsAPI = require('./endpoints/settings');
@@ -29,6 +30,7 @@ var SuiteAPI = function(options) {
   this.externalEvent = ExternalEventAPI.create(this._apiRequest, options);
   this.settings = SettingsAPI.create(this._apiRequest, options);
   this.purchase = PurchaseAPI.create(this._apiRequest, options);
+  this.programResource = ProgramResourceAPI.create(this._apiRequest, options);
 
   this.environment = options.environment;
 };
@@ -90,6 +92,7 @@ module.exports = SuiteAPI;
 module.exports.Administrator = AdministratorAPI;
 module.exports.Contact = ContactAPI;
 module.exports.ContactList = ContactListAPI;
+module.exports.ProgramResource = ProgramResourceAPI;
 module.exports.Language = LanguageAPI;
 module.exports.ExternalEvent = ExternalEventAPI;
 module.exports.Settings = SettingsAPI;
