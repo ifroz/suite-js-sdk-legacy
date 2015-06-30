@@ -11,10 +11,8 @@ var ProgramResource = function(request, options) {
 ProgramResource.prototype = {
   list: function(customerId, serviceId) {
     logger.log('programresource_list');
-    return this._request.get(customerId,
-        '/programresource/service_id=' + serviceId);
+    return this._request.get(customerId, '/programresource/?service_id=' + serviceId);
   }
-
 };
 
 ProgramResource.create = function(request, options) {
@@ -22,3 +20,4 @@ ProgramResource.create = function(request, options) {
 };
 
 module.exports = ProgramResource;
+

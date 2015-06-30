@@ -10,6 +10,7 @@ var LanguageAPI = require('./endpoints/language');
 var ExternalEventAPI = require('./endpoints/externalevent');
 var SettingsAPI = require('./endpoints/settings');
 var Request = require('./../lib/api-request');
+var ProgramResourceAPI = require('./endpoints/programresource');
 var expect = require('chai').expect;
 var SuiteRequestOptions = SuiteRequest.Options;
 
@@ -159,6 +160,9 @@ describe('SuiteApi', function() {
       this.sandbox.stub(LanguageAPI, 'create').returns('FromLanguageEndpointStub');
       this.sandbox.stub(ExternalEventAPI, 'create').returns('FromExternalEventEndpointStub');
       this.sandbox.stub(SettingsAPI, 'create').returns('FromSettingsEndpointStub');
+      this.sandbox.stub(ProgramResourceAPI, 'create').returns('FromProgramResourceEndpointStub');
+      this.sandbox.stub(SuiteRequestOptions, 'createForInternalApi').withArgs(environment).returns('SuiteRequestOptionsStub');
+      this.sandbox.stub(SuiteRequestOptions, 'createForServiceApi').withArgs(environment).returns('SuiteServiceRequestOptionsStub');
       var suiteRequestStub = this.sandbox.stub(SuiteRequest, 'create');
       suiteRequestStub.withArgs(apiKey, apiSecret, 'SuiteRequestOptionsStub').returns('SuiteRequestStub');
       suiteRequestStub.withArgs(apiKey, apiSecret, 'SuiteServiceRequestOptionsStub').returns('SuiteServiceRequestStub');
@@ -203,6 +207,10 @@ describe('SuiteApi', function() {
       expect(SettingsAPI.create).to.have.been.calledWith(fakeRequest);
     });
 
+    it('should have an SDK object with Program Resource endpoint', function() {
+      expect(sdk.programResource).to.eql('FromProgramResourceEndpointStub');
+      expect(ProgramResourceAPI.create).to.have.been.calledWith(fakeRequest);
+    });
   });
 
 
