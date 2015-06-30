@@ -14,7 +14,6 @@ var ContactList = function(request, options) {
 util.inherits(ContactList, Base);
 
 _.extend(ContactList.prototype, {
-
   create: function(payload, options) {
     logger.log('contactlist_create');
 
@@ -44,9 +43,24 @@ _.extend(ContactList.prototype, {
         options
       );
     }.bind(this));
-  }
+  },
 
+  get: function(payload, options) {
+    return this._requireParameters(payload, ['contact_list_id']).then(function() {
+      logger.log('contactlist_get');
+      var url = util.format('/contactlist/%s', payload.contact_list_id);
+      return this._request.get(
+          this._getCustomerId(options),
+          this._buildUrl(url, payload, ['contact_list_id']),
+          options);
+    });
+  }
 });
+
+ContactList.prototype.get = function(customerId, contactListId, options) {
+  logger.log('contactlist_get');
+  return this._request.get(customerId, '/contactlist/' + contactListId, options);
+};
 
 ContactList.create = function(request, options) {
   return new ContactList(request, options);
