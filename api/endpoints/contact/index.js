@@ -17,13 +17,16 @@ _.extend(Contact.prototype, {
 
   create: function(payload, options) {
     logger.log('contact_create');
-
     return this._request.post(
       this._getCustomerId(options),
       '/contact',
       payload,
       options
     );
+  },
+
+  fields: function(options) {
+    return this._request.get(this._getCustomerId(options), '/field');
   }
 
 });
