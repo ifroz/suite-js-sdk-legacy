@@ -26,6 +26,12 @@ _.extend(ContactList.prototype, {
     );
   },
 
+  all: function(payload, options) {
+    logger.log('contactlist_all');
+    return this._request.get(
+        this._getCustomerId(options),
+        this._buildUrl('/contactlist', payload, []));
+  },
 
   list: function(payload, options) {
     return this._requireParameters(payload, ['contact_list_id']).then(function() {
