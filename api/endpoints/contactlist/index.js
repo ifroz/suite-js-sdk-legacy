@@ -57,11 +57,6 @@ _.extend(ContactList.prototype, {
   }
 });
 
-ContactList.prototype.get = function(customerId, contactListId, options) {
-  logger.log('contactlist_get');
-  return this._request.get(customerId, '/contactlist/' + contactListId, options);
-};
-
 ContactList.create = function(request, options) {
   return new ContactList(request, options);
 };

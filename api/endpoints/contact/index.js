@@ -25,6 +25,14 @@ _.extend(Contact.prototype, {
     );
   },
 
+  get: function(payload, options) {
+    logger.log('contact_get');
+    return this._request.post(
+        this._getCustomerId(options),
+        '/contact/getdata',
+        payload);
+  },
+
   fields: function(options) {
     return this._request.get(this._getCustomerId(options), '/field');
   }
