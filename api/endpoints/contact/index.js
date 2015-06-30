@@ -25,6 +25,11 @@ _.extend(Contact.prototype, {
     );
   },
 
+  update: function(customerId, payload) {
+    logger.log('contact_update');
+    return this._request.put(customerId, '/contact', payload);
+  },
+
   get: function(payload, options) {
     logger.log('contact_get');
     return this._request.post(
@@ -34,6 +39,7 @@ _.extend(Contact.prototype, {
   },
 
   fields: function(options) {
+    logger.log('contact_fields');
     return this._request.get(this._getCustomerId(options), '/field');
   }
 
