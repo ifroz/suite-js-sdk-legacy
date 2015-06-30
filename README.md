@@ -250,3 +250,11 @@ In the example above, the API will be called with `customerId = 20234245`.
 ##### List
 
     suiteAPI.purchase.list(payload);
+
+### Program Resources
+
+#### List
+
+    suiteAPI.programResource.list(customerId, serviceId);
+
+>>>>>>> docs for program resources
