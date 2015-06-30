@@ -5,7 +5,6 @@ var _ = require('lodash');
 var logger = require('logentries-logformat')('suite-sdk');
 
 var Base = require('../_base');
-
 var ContactList = function(request, options) {
   Base.call(this, options);
   this._request = request;
