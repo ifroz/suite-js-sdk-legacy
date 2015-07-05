@@ -41,6 +41,13 @@ _.extend(Contact.prototype, {
   fields: function(options) {
     logger.log('contact_fields');
     return this._request.get(this._getCustomerId(options), '/field');
+  },
+
+  fieldChoices: function(payload, options) {
+    logger.log('contact_field_choices');
+    var url = '/field/' + payload.fieldId + '/choice/translate/' +
+        (payload.language || 'en');
+    return this._request.get(options.customerId, url);
   }
 
 });
