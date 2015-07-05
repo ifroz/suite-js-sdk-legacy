@@ -29,6 +29,12 @@ Contact.prototype = {
   fields: function(customerId) {
     logger.log('contact_fields');
     return this._request.get(customerId, '/field');
+  },
+
+  fieldChoices: function(customerId, fieldId, language) {
+    logger.log('contact_field_choices');
+    var url = '/field/' + fieldId + '/choice/translate/' + (language || 'en');
+    return this._request.get(customerId, url);
   }
 
 };
