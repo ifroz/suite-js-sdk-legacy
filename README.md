@@ -243,3 +243,10 @@ Supported option properties:
 #### List
 
     suiteAPI.purchase.list(customerId, startDate, endDate, offset, limit, options);
+
+### Program Resources
+
+#### List
+
+    suiteAPI.programResource.list(customerId, serviceId);
+

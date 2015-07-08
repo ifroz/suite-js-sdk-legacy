@@ -6,6 +6,7 @@ var ApiRequest = require('./../lib/api-request');
 var InternalApiRequest = require('./../lib/internal-api-request');
 var AdministratorAPI = require('./endpoints/administrator');
 var ContactAPI = require('./endpoints/contact');
+var ExportAPI = require('./endpoints/export');
 var ContactListAPI = require('./endpoints/contactlist');
 var ProgramResourceAPI = require('./endpoints/programresource');
 var LanguageAPI = require('./endpoints/language');
@@ -25,6 +26,7 @@ var SuiteAPI = function(options) {
   this._serviceApiRequest = this._createServiceApiRequest(options);
 
   this.administrator = AdministratorAPI.create(this._internalApirequest);
+  this.export = ExportAPI.create(this._internalApirequest);
   this.contact = ContactAPI.create(this._internalApirequest);
   this.contactList = ContactListAPI.create(this._internalApirequest);
   this.email = EmailAPI.create(this._internalApirequest);
@@ -111,6 +113,7 @@ SuiteAPI.createWithCache = function(cacheId, options) {
 
 module.exports = SuiteAPI;
 module.exports.Administrator = AdministratorAPI;
+module.exports.Export = ExportAPI;
 module.exports.Contact = ContactAPI;
 module.exports.ContactList = ContactListAPI;
 module.exports.ProgramResource = ProgramResourceAPI;
