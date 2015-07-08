@@ -26,6 +26,11 @@ Export.prototype = {
     logger.log('export_results');
     return this._request.get(customerId,
         '/export/' + exportId + '/data/limit=' + limit + '&offset=' + offset);
+  },
+
+  status: function(customerId, exportId) {
+    logger.log('export_status');
+    return this._request.get(customerId, '/export/' + exportId);
   }
 };
 
