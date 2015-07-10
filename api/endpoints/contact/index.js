@@ -25,9 +25,9 @@ _.extend(Contact.prototype, {
     );
   },
 
-  update: function(customerId, payload) {
+  update: function(payload, options) {
     logger.log('contact_update');
-    return this._request.put(customerId, '/contact', payload);
+    return this._request.put(this._getCustomerId(options), '/contact', payload);
   },
 
   get: function(payload, options) {
@@ -38,15 +38,17 @@ _.extend(Contact.prototype, {
         payload);
   },
 
-  fields: function(options) {
+  fields: function(payload, options) {
+    var url = !payload.translate_id ?
+        '/field/translate/' + payload.translate_id :
+        '/field';
     logger.log('contact_fields');
-    return this._request.get(this._getCustomerId(options), '/field');
+    return this._request.get(this._getCustomerId(options), url);
   },
 
   fieldChoices: function(payload, options) {
     logger.log('contact_field_choices');
-    var url = '/field/' + payload.fieldId + '/choice/translate/' +
-        (payload.language || 'en');
+    var url = '/field/' + payload.fieldId + '/choice/translate/' + (payload.language || 'en');
     return this._request.get(options.customerId, url);
   }
 
