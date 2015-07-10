@@ -1,41 +1,43 @@
 'use strict';
 
 var logger = require('logentries-logformat')('suite-sdk');
-var LIMIT = 1000000;
-var OFFSET = 0;
-var Export = function(request) {
+
+var Base = require('../_base');
+var Export = function(request, options) {
+  Base.call(this, options);
   this._request = request;
 };
-var x = {};
 
 Export.prototype = {
-  segment: function(customerId, options) {
+  segment: function(payload, options) {
     options = options || {};
     logger.log('export_segment');
-    return this._request.post(customerId, '/export/filter', options);
+    return this._request.post(this._getCustomerId(options),
+        '/export/filter', payload);
   },
 
-  contactList: function(customerId, options) {
+  contactList: function(payload, options) {
     logger.log('export_contactList');
-    return this._request.post(customerId, '/email/getcontacts', options);
+    return this._request.post(this._getCustomerId(options),
+        '/email/getcontacts', payload);
   },
 
-  results: function(customerId, exportId, offset, limit) {
-    limit = limit || LIMIT;
-    offset = offset || OFFSET;
+  results: function(payload, options) {
     logger.log('export_results');
-    return this._request.get(customerId,
-        '/export/' + exportId + '/data/limit=' + limit + '&offset=' + offset);
+    var url = '/export/' + payload.export_id + '/data';
+    return this._request.get(this._getCustomerId(options),
+        this._buildUrl(url, payload, ['export_id']));
   },
 
-  status: function(customerId, exportId) {
+  status: function(payload, options) {
     logger.log('export_status');
-    return this._request.get(customerId, '/export/' + exportId);
+    return this._request.get(this._getCustomerId(options),
+        '/export/' + payload.export_id);
   }
 };
 
-Export.create = function(request) {
-  return new Export(request);
+Export.create = function(request, options) {
+  return new Export(request, options);
 };
 
 module.exports = Export;
