@@ -39,7 +39,7 @@ _.extend(Contact.prototype, {
   },
 
   fields: function(payload, options) {
-    var url = !payload.translate_id ?
+    var url = (payload || {}).translate_id ?
         '/field/translate/' + payload.translate_id :
         '/field';
     logger.log('contact_fields');
@@ -48,8 +48,8 @@ _.extend(Contact.prototype, {
 
   fieldChoices: function(payload, options) {
     logger.log('contact_field_choices');
-    var url = '/field/' + payload.fieldId + '/choice/translate/' + (payload.language || 'en');
-    return this._request.get(options.customerId, url);
+    var url = '/field/' + payload.field_id + '/choice/translate/' + (payload.language || 'en');
+    return this._request.get(this._getCustomerId(options), url);
   }
 
 });

@@ -9,9 +9,10 @@ var ProgramResource = function(request, options) {
 };
 
 ProgramResource.prototype = {
-  list: function(customerId, serviceId) {
+  list: function(payload, options) {
     logger.log('programresource_list');
-    return this._request.get(customerId, '/programresource/?service_id=' + serviceId);
+    return this._request.get(this._getCustomerId(options),
+        '/programresource/?service_id=' + payload.service_id);
   }
 };
 
